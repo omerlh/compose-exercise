@@ -9,6 +9,7 @@ const url = 'mongodb://localhost:27017';
 // Database Name
 const dbName = 'myproject';
 
+
 // Create a new MongoClient
 
 
@@ -19,20 +20,27 @@ module.exports = async function()
     })
 
     app.get('/', async (req, res) => {
-        const client = new MongoClient(url);
-        await client.connect();
-        const db = client.db(dbName);
-        const collection = db.collection('documents');
-        // Find some documents
-        const cursor = collection.find({});
-        const docs = await cursor.toArray();
-        //await cursor.close();
+        try {
+            const client = new MongoClient(url);
+            //const client = new MongoClient(url);
+            await client.connect();
+            const db = client.db(dbName);
+            const collection = db.collection('documents');
+            // Find some documents
+            const rows = await collection.find({}).toArray();
+           //   
+            //await cursor.close();
 
-        client.close();
-
+            client.close();
+            res.json({docs: rows});
+        } catch(ex) {
+            console.log(ex)
+            res.send(ex, 500);
+        }
       //  res.send(docs);
-      res.send('hello');
+
     } );
+
 
 
     return app;
