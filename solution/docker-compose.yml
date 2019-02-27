@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  mongo:
+    image: mongo
+    logging:
+      driver: none
+  api:
+    build:
+      context: ../
+      dockerfile: ./solution/Dockerfile
+    command: ["yarn", "test"]
+    environment:
+      - CONNECTION_STRING=mongodb://mongo:27017
+    

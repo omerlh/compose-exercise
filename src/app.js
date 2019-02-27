@@ -3,8 +3,8 @@ const app = express()
 
 const MongoClient = require('mongodb').MongoClient;
 
-// Connection URL
-const url = 'mongodb://localhost:27017';
+// Connection URL - NEVER DO IT IN PRODUCTION: use configuration files for sensitive configuration
+const url = process.env.CONNECTION_STRING ? process.env.CONNECTION_STRING : 'mongodb://localhost:27017';
 
 // Database Name
 const dbName = 'myproject';
@@ -28,6 +28,7 @@ module.exports = async function()
             const collection = db.collection('documents');
             // Find some documents
             const rows = await collection.find({}).toArray();
+
            //   
             //await cursor.close();
 
