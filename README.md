@@ -12,8 +12,10 @@ In case something is misbehave, make sure you have this version or above.
 
 ## Step 0 - Running locally
 Run the tests manually. To run the tests, we first need a MongoDB instance.
-* Use `docker` to run a MongoDB instance on your machine. Make sure you use an official image.
-* Once MongoDB is running (make sure you can connect to it!), try to run the tests:
+* Use `docker` to run a MongoDB instance on your machine. Make sure you use an official image. Hint: Mongo is running on port 27017, make sure you publish this port. To test connection use one of the following:
+    * `nc -vz localhost 27017` (Linux/OSX)
+    * `Test-NetConnection -Computer localhost -Port 27017` (Windows)
+* Try to run the tests:
 `yarn install && yarn test`
 * If you did everything correctly, the test will run successfully.
 
