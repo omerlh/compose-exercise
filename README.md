@@ -4,16 +4,18 @@ The repository contains an API that has one endpoint (`/`), that returns all the
 The code for the API is under `src`.
 The repository also contains integration tests (under `test`). The test calls the single endpoint and makes sure it returns an empty array.
 
+This guide was tested on:
+* Windows - Docker version Version 2.0.0.0-win81 (29211)
+* Mac - Docker version Version 2.0.0.3 (31259)
+
+In case something is misbehave, make sure you have this version or above.
+
 ## Step 0 - Running locally
 Run the tests manually. To run the tests, we first need a MongoDB instance.
 * Use `docker` to run a MongoDB instance on your machine. Make sure you use an official image.
 * Once MongoDB is running (make sure you can connect to it!), try to run the tests:
 `yarn install && yarn test`
 * If you did everything correctly, the test will run successfully.
-* Windows user: MongoDB will be exposed on the docker host VM, not on localhost. To fix, run the following:
-```
-setx CONNECTION_STRING "mongodb://<docker host ip>:27017"
-```
 
 ## Step 1 - Adding a docker container
 Local running is nice, but how can we run this in the CI? Let's start with writing a docker file for the API.
